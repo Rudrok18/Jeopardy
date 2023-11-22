@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Inicio</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .container {
+        
+        width: 80%;
+        margin: auto;
+        padding: 25px;
+        border: 2px solid rgb(24, 29, 35);
+        border-radius: 20px;
+      }
+  
+      .btn-primary {
+        background-color: white;
+        color: black;
+        border: 1.5px solid black;
+        padding: 10px;
+        width: 35%;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div>
+      <table class="table" width="100%">
+        <thead>
+          <tr>
+            <td colspan="2">
+              <center>
+                <h1>Jeopardy</h1>
+                <br>
+              </center>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2"><img src="https://i.ibb.co/n6s4yHZ/jeopardy-start.jpg" width="100%" height="auto"
+                alt="Foto Jeopardy"> </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="container">
+                <h2 class="text-center">Start Creating!</h2>
+                <form class="mt-5">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                  </div>
+                  <br>
+                  <center>
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                  </center>
+                </form>
+
+                <p class="text-center mt-3">Don't have an account? <a href=# data-toggle="modal" data-target="#signup_modal">Sign up</a></p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="signup_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create an account</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="mt-5">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="Insert email">
+              </div>
+              <div>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+                <br>
+                <input type="password" class="form-control" id="password_confirmation" placeholder="Confirm password">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+
+</html>
