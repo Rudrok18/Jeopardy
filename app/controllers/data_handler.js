@@ -3,8 +3,8 @@
 const fs = require('fs')
 const Game = require('./game')
 
-let content = fs.readFileSync('../data/games.json')
-let games = JSON.parse(content).map(Game.createFromObject);
+let content = fs.readFileSync('app/data/games.json');
+//let games = JSON.parse(content).map(Game.createFromObject);
 
 function getGames() {
     return games;

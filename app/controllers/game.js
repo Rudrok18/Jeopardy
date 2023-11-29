@@ -117,3 +117,5 @@ class Category {
         this._question4 = value;
     }
 }
+
+module.exports = Game;
