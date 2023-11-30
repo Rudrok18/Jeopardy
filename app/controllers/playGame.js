@@ -1,3 +1,8 @@
+"use strict";
+
+const fs = require('fs')
+const Game = require('./game')
+
 let currentQuestion = 0;
 //el arreglo es para poder tener un registro de las preguntas que ya se jugaron y no poder volver a preguntarlas
 let score1 = 0;
@@ -18,3 +23,6 @@ function startGame(){
     score6 = 0;
      
 }
+
+
+
