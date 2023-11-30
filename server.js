@@ -21,12 +21,6 @@ app.listen(port, () => {
     console.log(`Jeopardy listening on port ${port}!`);
 })
 
-
-router.route('/:id')
-    .get((req, res) => {
-        
-    })
-
 router.route('/,/start')
     .get((req, res) => {
         res.status(200).sendFile(routeStart);
