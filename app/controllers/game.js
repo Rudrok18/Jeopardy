@@ -15,11 +15,19 @@ class CategoryException {
 }
 
 class Game {
-    constructor(title, categories) {
+    constructor(title, categories, imgUrl) {
         this._uuid = utils.generateUUID();
         this.title = title;
-        this.categories = categories;
-        
+        this.categories = this.limitCategories(categories);
+        this.imgUrl = imgUrl;
+    }
+
+    limitCategories(categories) {
+        if (categories.length !== 6) {
+            throw new Error('6 categories required')
+        }
+
+        return categories.map(category => new Category(category.name, category.questions));
     }
 
     get uuid() {
@@ -31,7 +39,7 @@ class Game {
     }
 
     get title() {
-        return this.title;
+        return this._title;
     }
 
     set title(value) {
@@ -42,7 +50,7 @@ class Game {
     }
 
     get categories() {
-        return this.categories;
+        return this._categories;
     }
 
     set categories(value){
@@ -51,15 +59,64 @@ class Game {
         }
         this._categories = value;
     }
+
+    get imgUrl() {
+        return this._imgUrl;
+    }
+
+    set imgUrl(value) {
+        if (typeof value !== "string") {
+            throw new ProductException("Image url cannot be empty");
+        }
+        this._imgUrl = value;
+    }
+
+    /*static createFromJson(jsonValue) {
+        let obj = JSON.parse(jsonValue);
+        return Game.createFromObject(obj);
+    }*/
+
+    /*static createFromObject(obj) {
+        let newGame = {};
+        Object.assign(newGame, obj);
+        Game.cleanObject(newGame);
+
+        let game = new Game(newGame.title, newGame.categories, newGame.imgUrl);
+        game._uuid = new.uuid;
+
+        return game;
+    }
+
+    static cleanObject(obj) {
+        const gameProperties = ['_uuid', 'title', 'categories', 'imgUrl'];
+        for (let prop in obj) {
+            if (!gameProperties.includes(prop)) {
+                delete obj[prop];
+            } else if (prop === 'categories' && Array.isArray(obj[prop])) {
+                obj[prop].forEach(category => {
+                    for (let categoryProp in category) {
+                        if (categoryProp !== 'name' && categoryProp !== 'questions') {
+                            delete category[categoryProp];
+                        }
+                    }
+                });
+            }
+        }
+    }*/
 }
 
 class Category {
-    constructor(name, question1, question2, question3, question4) {
+    constructor(name, questions) {
         this.name = name;
-        this.question1 = question1;
-        this.question2 = question2;
-        this.question3 = question3;
-        this.question4 = question4;
+        this.questions = this.limitQuestions(questions);
+    }
+
+    limitQuestions(questions) {
+        if (questions.length !== 4) {
+            throw new Error("4 quesitons required");
+        }
+
+        return questions;
     }
 
     get name() {
@@ -73,49 +130,17 @@ class Category {
         this._name = value;
     }
 
-    get question1() {
-        return this.question1;
+    get questions() {
+        return this._questions;
     }
 
-    set question1(value) {
+    set questions(value) {
         if (typeof value !== "string" || value === '') {
             throw new CategoryException("Questions cannot be emty")
         }
-        this._question1 = value;
-    }
-
-    get question2() {
-        return this.question1;
-    }
-
-    set question2(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new CategoryException("Questions cannot be emty")
-        }
-        this._question2 = value;
-    }
-
-    get question3() {
-        return this.question1;
-    }
-
-    set question3(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new CategoryException("Questions cannot be emty")
-        }
-        this._question3 = value;
-    }
-
-    get question4() {
-        return this.question1;
-    }
-
-    set question4(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new CategoryException("Questions cannot be emty")
-        }
-        this._question4 = value;
+        this._questions = value;
     }
 }
 
 module.exports = Game;
+module.exports = Category;

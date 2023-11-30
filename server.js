@@ -1,6 +1,6 @@
 "use strict";
 
-const express = require('express');
+/*const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();
 const port = 8000;
@@ -21,7 +21,7 @@ app.listen(port, () => {
     console.log(`Jeopardy listening on port ${port}!`);
 })
 
-/*
+
 router.route('/:id')
     .get((req, res) => {
         
