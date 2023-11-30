@@ -65,58 +65,63 @@ class Game {
     }
 
     set imgUrl(value) {
-        if (typeof value !== "string") {
-            throw new ProductException("Image url cannot be empty");
+        if (typeof value !== "string" || value === '') {
+            throw new GameException("Image url cannot be empty");
         }
         this._imgUrl = value;
     }
 
-    /*static createFromJson(jsonValue) {
-        let obj = JSON.parse(jsonValue);
-        return Game.createFromObject(obj);
-    }*/
-
-    /*static createFromObject(obj) {
-        let newGame = {};
+    static createFromObject(obj) {
+        let newGame = {}
         Object.assign(newGame, obj);
         Game.cleanObject(newGame);
 
-        let game = new Game(newGame.title, newGame.categories, newGame.imgUrl);
-        game._uuid = new.uuid;
+        let game = new Game(obj.title, obj.categories, obj.imgUrl);
+        game._uuid = obj.uuid;
 
         return game;
     }
 
-    static cleanObject(obj) {
-        const gameProperties = ['_uuid', 'title', 'categories', 'imgUrl'];
-        for (let prop in obj) {
-            if (!gameProperties.includes(prop)) {
-                delete obj[prop];
-            } else if (prop === 'categories' && Array.isArray(obj[prop])) {
-                obj[prop].forEach(category => {
-                    for (let categoryProp in category) {
-                        if (categoryProp !== 'name' && categoryProp !== 'questions') {
-                            delete category[categoryProp];
-                        }
-                    }
-                });
-            }
-        }
-    }*/
+
+    static cleanObject(gameObj) {
+        const allowedGameProperties = ['_uuid', 'title', 'categories', 'imgUrl'];
+        const allowedCategoryProperties = ['name', 'questions'];
+
+        const filteredObj = Object.keys(gameObj)
+            .filter(key => allowedGameProperties.includes(key))
+            .reduce((acc, key) => {
+                if (key === 'categories') {
+                    acc[key] = gameObj[key].map(category => {
+                        return Object.keys(category)
+                            .filter(categoryKey => allowedCategoryProperties.includes(categoryKey))
+                            .reduce((catAcc, categoryKey) => {
+                                catAcc[categoryKey] = category[categoryKey];
+                                return catAcc;
+                            }, {});
+                    });
+                } else {
+                    acc[key] = gameObj[key];
+                }
+                return acc;
+            }, {});
+
+        return filteredObj;
+    }
 }
 
 class Category {
     constructor(name, questions) {
         this.name = name;
-        this.questions = this.limitQuestions(questions);
+        this._questions = this.limitQuestions(questions);
     }
 
     limitQuestions(questions) {
-        if (questions.length !== 4) {
-            throw new Error("4 quesitons required");
+        if (Array.isArray(questions) && questions.length === 4 && questions.every(item => typeof item === 'string')) {
+            return questions;
+        } else {
+            console.error('Questions must be an array of strings.');
+            return [];
         }
-
-        return questions;
     }
 
     get name() {
@@ -134,13 +139,77 @@ class Category {
         return this._questions;
     }
 
-    set questions(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new CategoryException("Questions cannot be emty")
+    set questions(value){
+        if (Array.isArray(newQuestions) && newQuestions.length === 4 && newQuestions.every(item => typeof item === 'string')) {
+            this._questions = newQuestions;
+        } else {
+            console.error('Questions must be an array of 4 strings');
         }
-        this._questions = value;
     }
 }
 
+const myGameObject = {
+    uuid: "1xxxxx",
+        title: "Juego 1",
+        categories: [
+            {
+                name: "Categoria A",
+                questions: [
+                    "A1",
+                    "A2",
+                    "A3",
+                    "A4"
+                ]
+                
+                    
+            },
+            {
+                name: "Categoria B",
+                questions: [
+                    "B1",
+                    "B2",
+                    "B3",
+                    "B4"
+                ]
+            },
+            {
+                name: "Categoria C",
+                questions: [
+                    "C1",
+                    "C2",
+                    "C3",
+                    "C4"
+                ]
+            },
+            {
+                name: "Categoria D",
+                questions: [
+                    "D1",
+                    "D2",
+                    "D3",
+                    "D4"
+                ]
+            },
+            {
+                name: "Categoria E",
+                questions: [
+                    "E1",
+                    "E2",
+                    "E3",
+                    "E4"
+                ]
+            },
+            {
+                name: "Categoria F",
+                questions: [
+                    "F1",
+                    "F2",
+                    "F3",
+                    "F4"
+                ]
+            }
+        ],
+        imgUrl: "https://ibb.co/Gtx3h2k"
+}
 module.exports = Game;
-module.exports = Category;
+    

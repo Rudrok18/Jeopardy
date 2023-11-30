@@ -1,6 +1,6 @@
 "use strict";
 
-/*const express = require('express');
+const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();
 const port = 8000;
@@ -63,4 +63,3 @@ router.route('/,/board')
     })
 
 module.exports = router;
-*/

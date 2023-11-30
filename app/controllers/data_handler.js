@@ -5,7 +5,8 @@ const Game = require('./game')
 
 let content = fs.readFileSync('app/data/games.json');
 let games = JSON.parse(content).map(Game.createFromObject);
-//console.table(games);
+
+console.table(games);
 
 function getGames() {
     return games;
