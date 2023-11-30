@@ -3,8 +3,9 @@
 const fs = require('fs')
 const Game = require('./game')
 
-let content = fs.readFileSync('../data/games.json')
+let content = fs.readFileSync('app/data/games.json');
 let games = JSON.parse(content).map(Game.createFromObject);
+//console.table(games);
 
 function getGames() {
     return games;
@@ -15,10 +16,8 @@ function getGameById(uuid) {
 }
 
 function createGame(game) {
-    game = Game.createFromObject(game);
-    let newGame = new Game(game.title, game.categories);
-    games.push(newGame);
-    return newGame;
+    games.push(Game.createFromObject(game));
+    
 }
 
 function updateGame(uuid, updatedGame) {

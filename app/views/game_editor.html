@@ -56,24 +56,34 @@
     img {
       margin-block: 3%;
     }
+
+    .game_img {
+      height: 400px;
+      width: 400px;
+    }
   </style>
 </head>
 
 <body>
   <table cellpadding="30%" align="center" width="100%">
-    <tr>
-      <td>
-        <button><a href="edit_page.html" style="width: 100%; text-align: center; color: white; text-decoration: none;">Create new game</a></button>
+    <tr align="center">
+      <td align="left">
+        <button><a href="start.html" style="width: 100%; text-align: center; color: white; text-decoration: none;">Start</a></button>
       </td>
-      <td valign=" top" padding="2%" align="center">
+      <td valign="top" padding="2%" align="center">
         <h1>Game Editor</h1>
       </td>
       <td>
-        <input class="form-control col-lg-8 mr-2" type="text" placeholder="Search">
+        <button><a href="edit_page.html" style="width: 100%; text-align: center; color: white; text-decoration: none;">Create new game</a></button>
+      </td>
+    </tr>
+    <tr align="center">
+      <td align="left">
+        <button><a href="my_games.html" style="width: 100%; text-align: center; color: white; text-decoration: none;">My games</a></button>
       </td>
     </tr>
     <tr>
-      <td>
+      <td align="left" align="top">
         <nav>
           <a href="#">Game 1</a>
           <a href="#">Game 2</a>
@@ -83,8 +93,8 @@
           <a href="#">Game 6</a>
         </nav>
       </td>
-      <td align="center" colspan="2">
-        <img src="#" alt="game_editor">
+      <td align="center">
+        <img class="game_img" src="https://www.biu.ac.il/sites/default/files/styles/article_image_mobile/public/2022-12/Ed%20Greenstein%20Jeopardy%20December%202022.jpg?itok=iWQ1VCjR" alt="game_editor" >
         <div class="button"><button>Start editing</button></div>
       </td>
     </tr>
