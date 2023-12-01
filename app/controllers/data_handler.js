@@ -20,14 +20,14 @@ function getGameById(uuid) {
 function readGamesFromFile() {
     try {
         const data = fs.readFileSync(gamesFilePath, 'utf8');
-        return JSON.parse(data);
+        return JSON.parse(data).map(Game.createFromObject);
     } catch (error) {
         console.error('Error reading games from file: ', error);
         return [];
     }
 }
 
-function writeGamesToFile() {
+function writeGamesToFile(games) {
     try {
         fs.writeFileSync(gamesFilePath, JSON.stringify(games, null, 2), 'utf8');
     } catch (error) {
@@ -35,31 +35,51 @@ function writeGamesToFile() {
     }
 }
 
-function createGame(newGame) {
-    const games = readGamesFromFile();
-    games.push(newGame);
-    writeGamesToFile(games);
-    console.log(newGame);
-    return newGame;
+function createGame(gameData) {
+    return fetch('/games', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function updateGame(uuid, updatedGame) {
-    const gameIndex = games.findIndex(game => game._uuid === uuid);
-
-    if (gameIndex !== -1) {
-        games[gameIndex] = {...games[gameIndex], ...updatedGame};
-    } else {
-        throw new Error("game not found");
-    }
+function updateGame(id, updatedGameData) {
+    return fetch(`/games/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedGameData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function deleteGame() {
-    const gameIndex = games.findIndex(game => game.uuid === uuid);
-    if (gameIndex !== -1) {
-        games.splice(gameIndex, 1);
-    } else {
-        throw new Error("Game not found")
-    }
+function deleteGame(id) {
+    return fetch(`/games/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 exports.getGames = getGames;
