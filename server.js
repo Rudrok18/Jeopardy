@@ -14,7 +14,7 @@ const routeEdit_Page = path.join(__dirname, 'app', 'views', 'edit_page.html');
 const routePrep = path.join(__dirname, 'app', 'views', 'prep.html');
 const routeBoard = path.join(__dirname, 'app', 'views', 'board.html');
 
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(router);
 

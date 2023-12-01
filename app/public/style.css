@@ -1,0 +1,23 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.category {
+text-align: center;
+font-weight: bold;
+}
+.questions{
+
+width: 150px;
+height: 100px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: auto;
+}
+th, td{
+padding: 10px
+}
