@@ -82,7 +82,7 @@ class Game {
         Game.cleanObject(newGame);
 
         let game = new Game(obj.title, obj.categories, obj.imgUrl);
-        game._uuid = obj.uuid;
+        //game._uuid = obj.uuid;
 
         return game;
     }

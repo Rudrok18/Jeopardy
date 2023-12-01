@@ -1,6 +1,5 @@
 [
     {
-        "uuid": "1xxxxx",
         "title": "Juego 1",
         "categories": [
             {
@@ -63,7 +62,6 @@
         "imgUrl": "https://ibb.co/Gtx3h2k"
     },
     {
-        "uuid": "2xxxxx",
         "title": "Juego 2",
         "categories": [
             {
@@ -126,7 +124,6 @@
         "imgUrl": "https://ibb.co/Gtx3h2k"
     },
     {
-        "uuid": "3xxxxx",
         "title": "Juego 3",
         "categories": [
             {

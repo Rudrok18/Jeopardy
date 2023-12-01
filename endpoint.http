@@ -7,7 +7,6 @@ POST http://localhost:8000/games
 Content-Type: application/json
 
 {
-    "uuid": "4xxxxx",
     "title": "Juego 4",
     "categories": [
             {
@@ -72,7 +71,7 @@ Content-Type: application/json
 
 
 ### Update existing game
-PUT http://localhost:8000/games/1xxxxx
+PUT http://localhost:8000/games/0906ee7b-7353-4acf-9f54-24cdd46c8f46
 Content-Type: application/json
 
 {
@@ -81,4 +80,4 @@ Content-Type: application/json
 
 ### Delete game
 
-DELETE http://localhost:8000/games/1xxxxx 
+DELETE http://localhost:8000/games/0906ee7b-7353-4acf-9f54-24cdd46c8f46

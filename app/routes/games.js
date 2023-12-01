@@ -3,11 +3,19 @@
 const express = require('express');
 const router = express.Router();
 const dataHandler = require('./../controllers/data_handler');
-const Game = require('./../controllers/game')
+const Game = require('./../controllers/game');
+
+const url = 'https://localhost:8000/games';
+console.log('Fetching data from:', url);
+
+/*fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));*/
 
 router.route('/')
     .get((req, res) => {
-        let query = req.query.fitler;
+        let query = req.query.filter;
 
         let games;
 
@@ -50,7 +58,7 @@ router.put('/:id', async (req, res) => {
             res.status(404).send("Game not found");
             return;
         }
-        dataHandler.updateGame(req.params.id, gameToUpdate);
+        dataHandler.updateGame(req.body.id, gameToUpdate);
         res.status(200).json(gameToUpdate);
     } catch (err) {
         res.status(400).send("Game not updated");

@@ -1,5 +1,7 @@
 "use strict";
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const fs = require('fs');
 const Game = require('./game');
 const path = require("path");
@@ -36,7 +38,7 @@ function writeGamesToFile(games) {
 }
 
 function createGame(gameData) {
-    return fetch('/games', {
+    return fetch('https://localhost:8000/games', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +55,7 @@ function createGame(gameData) {
 }
 
 function updateGame(id, updatedGameData) {
-    return fetch(`/games/${id}`, {
+    return fetch(`https://localhost:8000/games/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +72,7 @@ function updateGame(id, updatedGameData) {
 }
 
 function deleteGame(id) {
-    return fetch(`/games/${id}`, {
+    return fetch(`https://localhost:8000/games/${id}`, {
         method: 'DELETE',
     })
     .then(response => {
