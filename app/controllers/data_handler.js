@@ -7,7 +7,7 @@ const path = require("path");
 let content = fs.readFileSync('app/data/games.json');
 const gamesFilePath = path.join(__dirname, "..", "data", "games.json");
 let games = JSON.parse(content).map(Game.createFromObject);
-console.table(games);
+//console.table(games);
 
 function getGames() {
     return games;
@@ -35,10 +35,11 @@ function writeGamesToFile() {
     }
 }
 
-function createGame(game) {
+function createGame(newGame) {
     const games = readGamesFromFile();
     games.push(newGame);
     writeGamesToFile(games);
+    console.log(newGame);
     return newGame;
 }
 
@@ -60,7 +61,6 @@ function deleteGame() {
         throw new Error("Game not found")
     }
 }
-
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;

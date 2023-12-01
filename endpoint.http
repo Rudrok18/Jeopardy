@@ -4,7 +4,6 @@ GET http://localhost:8000/games
 ### Post new game 
 
 POST http://localhost:8000/games
-
 Content-Type: application/json
 
 {
@@ -70,3 +69,16 @@ Content-Type: application/json
     ],
     "imgUrl": "https://ibb.co/Gtx3h2k"
 }
+
+
+### Update existing game
+PUT http://localhost:8000/games/1xxxxx
+Content-Type: application/json
+
+{
+    "title": "History"
+}
+
+### Delete game
+
+DELETE http://localhost:8000/games/1xxxxx 

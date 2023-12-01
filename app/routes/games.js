@@ -36,19 +36,31 @@ router.route('/:id')
 router.post('/', async (req, res) => {
     try {
     const newGame = new Game(req.body);
-    const savedGame = await newGame.save();
-    console.log(req.body);
-    res.status(200).json(savedGame);
+    dataHandler.createGame(newGame);
+    res.status(200).json(newGame);
     } catch (err) {
-        res.status(400).send("Error");
+        res.status(400).send("Game not created");
     }
     });
 
-/*router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const updatedGame = await Game.();
-        if (!de)
+        const updatedGame = await Game.getGameById(req.params.id);
+        dataHandler.updateGame(updatedGame);
+        res.status(200).json(updatedGame)
+    } catch (err) {
+        res.status(400).send("Game not updated")
     }
-})*/
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedGame = await Game.getGameById(req.params.id);
+        dataHandler.deleteGame(deletedGame);
+        res.status(200).json(deletedGame)
+    } catch (err) {
+        res.status(400).send("Game not deleted")
+    }
+})
 
 module.exports = router;
