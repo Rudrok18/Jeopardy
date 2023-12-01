@@ -3,41 +3,39 @@
 const express = require('express');
 const router = express.Router();
 const dataHandler = require('./../controllers/data_handler');
+const Game = require('./../controllers/game');
 
-router.route('/')
-    .post((req, res) =>{
-        let game = req.body;
-        try {
-            dataHandler.createGame(game);
-        } catch (e) {
-            res.status(400).send("Object not recieved");
+router.post('/', async (req, res) => {
+    try {
+        const newGame = new Game(req.body.title, req.body.categories, req.body.imgUrl);
+        dataHandler.createGame(newGame);
+        res.status(200).json(newGame);
+    } catch (err) {
+        res.status(400).send("Game not created");
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        const gameToUpdate = dataHandler.getGameById(req.params.id);
+        if (!gameToUpdate) {
+            res.status(404).send("Game not found");
+            return;
         }
-        res.send("Game created succesfully")
-    });
+        dataHandler.updateGame(req.params.id, gameToUpdate);
+        res.status(200).json(gameToUpdate);
+    } catch (err) {
+        res.status(400).send("Game not updated");
+    }
+});
 
-router.route('/:id')
-    .put((req, res) => {
-        let id = req.params.id;
-        let product = req.body;
-
-        try {
-            dataHandler.updateGame(id);
-        } catch (e) {
-            res.status(404).send("ID not found");
-        }
-        res.send("Game updated successfully");
-    })
-
-    .delete((req, res) => {
-        let id = req.params.id;
-        let game = req.body;
-
-        try {
-            dataHandler.deleteGame(id);
-        } catch (e) {
-            res.status(404).send("ID not found");
-        }
-        res.send("Game deleted successfully");
-    })
+router.delete('/:id', async (req, res) => {
+    try {
+        dataHandler.deleteGame(req.params.id);
+        res.status(200).send("Game deleted");
+    } catch (err) {
+        res.status(400).send("Game not deleted");
+    }
+});
 
 module.exports = router;
