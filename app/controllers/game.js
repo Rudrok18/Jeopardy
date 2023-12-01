@@ -71,20 +71,19 @@ class Game {
         this._imgUrl = value;
     }
 
-    /*static createFromJson(jsonValue) {
+    static createFromJson(jsonValue) {
         let obj = JSON.parse(jsonValue);
         return Game.createFromObject(obj);
-    }*/
+    }
 
-    /*static createFromObject(obj) {
+    static createFromObject(obj) {
         let newGame = {};
         Object.assign(newGame, obj);
         Game.cleanObject(newGame);
 
-        let game = new Game(newGame.title, newGame.categories, newGame.imgUrl);
-        game._uuid = new.uuid;
+        //game._uuid = utils.generateUUID();
 
-        return game;
+        return new Game(newGame.title, newGame.categories, newGame.imgUrl);
     }
 
     static cleanObject(obj) {
@@ -102,7 +101,7 @@ class Game {
                 });
             }
         }
-    }*/
+    }
 }
 
 class Category {

@@ -1,6 +1,6 @@
 "use strict";
 
-/*const express = require('express');
+const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();
 const port = 8000;
@@ -13,6 +13,7 @@ const routeGame_Editor = path.join(__dirname, 'app', 'views', 'game_editor.html'
 const routeEdit_Page = path.join(__dirname, 'app', 'views', 'edit_page.html');
 const routePrep = path.join(__dirname, 'app', 'views', 'prep.html');
 const routeBoard = path.join(__dirname, 'app', 'views', 'board.html');
+
 
 app.use(express.json());
 app.use(router);
@@ -63,4 +64,3 @@ router.route('/,/board')
     })
 
 module.exports = router;
-*/

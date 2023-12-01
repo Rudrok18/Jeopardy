@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
 
 const fs = require('fs')
 const Game = require('./game')
 
 let content = fs.readFileSync('app/data/games.json');
-let games = JSON.parse(content).map(Game.createFromObject);
-//console.table(games);
+let games = JSON.parse(fs.readFileSync("./app/data/games.json"));
+
+console.table(games);
 
 function getGames() {
     return games;
@@ -43,15 +44,60 @@ function findGame(query) {
     }
 }
 
-function genBoard(){
-    //poner el título
-    document.getElementById("GameTitle").textContent = games[0].title;
-    //poner preguntas
+function genBoard(game){
+    return `
+    <table width="100%">
+    <thead>
+      <h2 class="text-center" id="GameTitle">${game._title}</h2>
+      
+    </thead>
+    <tbody>
+      <tr class="category">
+        <td id="cat1">${game.categories[0]}</td>
+        <td id="cat2">${game.categories[1]}</td>
+        <td id="cat3">${game.categories[2]}</td>
+        <td id="cat4">${game.categories[3]}</td>
+        <td id="cat5">${game.categories[4]}</td>
+        <td id="cat6">${game.categories[5]}</td>
+      </tr> 
+      <tr>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+      </tr>
+    </tbody>
+    
+  </table>
+    `
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    genBoard();
-});
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
