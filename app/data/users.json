@@ -1,0 +1,14 @@
+[
+    {
+        "idUser": 1,
+        "username": "Rodrigo Lopez Coronado",
+        "email": "rodrigolopezc03@gmail.com",
+        "password" : "iteso2003"
+    },
+    {
+        "idUser": 2,
+        "username": "Fernando Lopez Coronado",
+        "email": "fernandolopezc02@gmail.com",
+        "password" : "iteso2002"
+    }
+]

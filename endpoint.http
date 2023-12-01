@@ -1,0 +1,72 @@
+### Get all games
+GET http://localhost:8000/games
+
+### Post new game 
+
+POST http://localhost:8000/games
+
+Content-Type: application/json
+
+{
+    "uuid": "4xxxxx",
+    "title": "Juego 4",
+    "categories": [
+            {
+                "name": "Categoria A",
+                "questions": [
+                    "A1",
+                    "A2",
+                    "A3",
+                    "A4"
+                ]
+                
+                    
+            },
+            {
+                "name": "Categoria B",
+                "questions": [
+                    "B1",
+                    "B2",
+                    "B3",
+                    "B4"
+                ]
+            },
+            {
+                "name": "Categoria C",
+                "questions": [
+                    "C1",
+                    "C2",
+                    "C3",
+                    "C4"
+                ]
+            },
+            {
+                "name": "Categoria D",
+                "questions": [
+                    "D1",
+                    "D2",
+                    "D3",
+                    "D4"
+                ]
+            },
+            {
+                "name": "Categoria E",
+                "questions": [
+                    "E1",
+                    "E2",
+                    "E3",
+                    "E4"
+                ]
+            },
+            {
+                "name": "Categoria F",
+                "questions": [
+                    "F1",
+                    "F2",
+                    "F3",
+                    "F4"
+                ]
+            }
+    ],
+    "imgUrl": "https://ibb.co/Gtx3h2k"
+}

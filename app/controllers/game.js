@@ -71,6 +71,11 @@ class Game {
         this._imgUrl = value;
     }
 
+    static createFromJson(value) {
+        let obj = JSON.parse(jsonValue);
+        return new Game(obj.title, obj.categories, obj.imgUrl)
+    }
+
     static createFromObject(obj) {
         let newGame = {}
         Object.assign(newGame, obj);
@@ -146,70 +151,6 @@ class Category {
             console.error('Questions must be an array of 4 strings');
         }
     }
-}
-
-const myGameObject = {
-    uuid: "1xxxxx",
-        title: "Juego 1",
-        categories: [
-            {
-                name: "Categoria A",
-                questions: [
-                    "A1",
-                    "A2",
-                    "A3",
-                    "A4"
-                ]
-                
-                    
-            },
-            {
-                name: "Categoria B",
-                questions: [
-                    "B1",
-                    "B2",
-                    "B3",
-                    "B4"
-                ]
-            },
-            {
-                name: "Categoria C",
-                questions: [
-                    "C1",
-                    "C2",
-                    "C3",
-                    "C4"
-                ]
-            },
-            {
-                name: "Categoria D",
-                questions: [
-                    "D1",
-                    "D2",
-                    "D3",
-                    "D4"
-                ]
-            },
-            {
-                name: "Categoria E",
-                questions: [
-                    "E1",
-                    "E2",
-                    "E3",
-                    "E4"
-                ]
-            },
-            {
-                name: "Categoria F",
-                questions: [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4"
-                ]
-            }
-        ],
-        imgUrl: "https://ibb.co/Gtx3h2k"
 }
 module.exports = Game;
     
