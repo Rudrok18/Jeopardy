@@ -20,7 +20,7 @@
       font-weight: bold;
     }
     .questions{
-      
+      background-color: lightgrey;
       width: 150px;
       height: 100px;
       border-radius: 10px;
@@ -32,12 +32,18 @@
     th, td{
       padding: 10px
     }
+   
+    .questions.clicked{
+      background-color: violet;
+    }
   </style>
 </head>
 
 <body>
-  
-  <!--<table width="100%">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="start.html">Jeopardy</a>
+  </nav>
+  <table width="100%">
     <thead>
       <h2 class="text-center" id="GameTitle">Game 1</h2>
       
@@ -52,41 +58,41 @@
         <td>Category #6</td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
       </tr>
     </tbody>
     
-  </table>-->
-  <!--<div id="modal_questions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  </table>
+  <div id="modal_questions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -97,14 +103,14 @@
         </div>
         <div class="modal-body">
           <button type="button" class="btn btn-primary" id="btnShowAns">Show answer</button>
-          <p id="answer">Answer</p>
+          <p id="answer" style="display: none;">Answer</p>
           <button type="button" class="btn btn-primary" id="btnCorrect">Correct</button>
           <button type="button" class="btn btn-primary" id="btnIncorrect">Incorrect</button>
         </div>
         </div>
       </div>
     </div>
-  </div>-->
+  </div>
 
   <div id="modal_end" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -118,13 +124,47 @@
         <div class="modal-body">
           <h2>Congratulations Team #1!</h2>
           <p>Team points</p>
-          <button type="button" class="btn btn-primary">Play again</button>
-        </div>
+          <button type="button" class="btn btn-primary" id="btnPlayAgain" href="board.html">Play again</button>
         </div>
       </div>
     </div>
   </div>
+  
+  <script>
+    let clickedButtons = 0;
+    function changeColor(button){
+      button.classList.add('clicked');
+      clickedButtons++;
 
+      if (clickedButtons === 8){
+        displayQuestionsModal();
+      }
+    }
+    function displayQuestionsModal(){
+      const modal = document.getElementById('modal_questions');
+      modal.style.display= 'block';
+
+      $('#modal_questions').on('hidden.bs.modal', function(e) {
+        displayEndGame();
+      });
+    }
+    function displayEndGame(){
+      $('#modal_end').modal('show');
+    }
+
+    document.getElementById('btnPlayAgain').addEventListener('click', function () {
+      location.reload();
+    });
+
+    document.getElementById('btnShowAns').addEventListener('click', function () {
+    document.getElementById('answer').style.display = 'block';
+    });
+
+    $('#modal_questions').on('hidden.bs.modal', function () {
+    document.getElementById('answer').style.display = 'none';
+    });
+   
+  </script>
  
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
