@@ -6,72 +6,64 @@ const dataHandler = require('./../controllers/data_handler');
 const Game = require('./../controllers/game');
 
 const url = 'https://localhost:8000/games';
-console.log('Fetching data from:', url);
 
-/*fetch(url)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));*/
+router.get('/', async (req, res) => {
+    try {
+        const games = await Game.find();
+        res.json(games);
+    } catch (error) {
+        res.status(400).json({message: "Error getting games", error: error.message});
+    }
+});
 
-router.route('/')
-    .get((req, res) => {
-        let query = req.query.filter;
-
-        let games;
-
-        if (query == undefined) {
-            try {
-                games = dataHandler.getGames();
-            } catch(e) {
-                res.status(400).send("Error");
-            }
-            res.status(200).json(games);
+router.get('/:id', async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.id);
+        if (!game) {
+            res.status(404).json({ message: "Game not found" });
+            return;
         }
-    })
-
-router.route('/:id')
-    .get((req, res) => {
-        let uuid = req.params.id;
-        let game = dataHandler.getGameById(uuid);
-
-        if (game != undefined) {
-            res.status(200).json(game)
-        } else {
-            res.status(400).send("ID not found")
-        }
-    })
+        res.json(game);
+    } catch (error) {
+        res.status(400).json({ message: "Error getting game by ID" });
+        return;
+    }
+});
 
 router.post('/', async (req, res) => {
     try {
-        const newGame = new Game(req.body.title, req.body.categories, req.body.imgUrl);
-        dataHandler.createGame(newGame);
-        res.status(200).json(newGame);
-    } catch (err) {
-        res.status(400).send("Game not created");
+        const newGame = new Game(req.body);
+        const savedGame = await newGame.save();
+        res.status(200).json(savedGame);
+    } catch (error) {
+        res.status(400).json({ message: "Error creating new game", error: error.message });
     }
 });
 
 router.put('/:id', async (req, res) => {
     try {
-        const gameToUpdate = dataHandler.getGameById(req.params.id);
-        if (!gameToUpdate) {
-            res.status(404).send("Game not found");
+        const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, { new: true});
+        if (!updatedGame) {
+            res.status(404).json({ message: "Game not found" });
             return;
         }
-        dataHandler.updateGame(req.body.id, gameToUpdate);
-        res.status(200).json(gameToUpdate);
-    } catch (err) {
-        res.status(400).send("Game not updated");
+        res.json(updatedGame);
+    } catch (error) {
+        res.status(400).json({ message: "Error updating game", error: error.message });
     }
-});
+})
 
 router.delete('/:id', async (req, res) => {
     try {
-        dataHandler.deleteGame(req.params.id);
-        res.status(200).send("Game deleted");
-    } catch (err) {
-        res.status(400).send("Game not deleted");
+        const deletedGame = await Game.findByIdAndDelete(req.params.id);
+        if (!deletedGame) {
+            res.status(404).json({ message: "Game not found" });
+            return;
+        }
+        res.json({ message: "Game deleted succesfully" });
+    } catch (error) {
+        res.status(400).json({ message: "Error deleting game", error: error.message });
     }
-});
+})
 
 module.exports = router;

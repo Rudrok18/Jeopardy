@@ -7,77 +7,26 @@ POST http://localhost:8000/games
 Content-Type: application/json
 
 {
-    "title": "Juego 4",
-    "categories": [
-            {
-                "name": "Categoria A",
-                "questions": [
-                    "A1",
-                    "A2",
-                    "A3",
-                    "A4"
-                ]
-                
-                    
-            },
-            {
-                "name": "Categoria B",
-                "questions": [
-                    "B1",
-                    "B2",
-                    "B3",
-                    "B4"
-                ]
-            },
-            {
-                "name": "Categoria C",
-                "questions": [
-                    "C1",
-                    "C2",
-                    "C3",
-                    "C4"
-                ]
-            },
-            {
-                "name": "Categoria D",
-                "questions": [
-                    "D1",
-                    "D2",
-                    "D3",
-                    "D4"
-                ]
-            },
-            {
-                "name": "Categoria E",
-                "questions": [
-                    "E1",
-                    "E2",
-                    "E3",
-                    "E4"
-                ]
-            },
-            {
-                "name": "Categoria F",
-                "questions": [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4"
-                ]
-            }
-    ],
-    "imgUrl": "https://ibb.co/Gtx3h2k"
+    "title": "Game 2",
+        "categories": [
+            { "name": "Category A", "questions": ["A1", "A2", "A3", "A4"] },
+            { "name": "Category B", "questions": ["B1", "B2", "B3", "B4"] },
+            { "name": "Category C", "questions": ["C1", "C2", "C3", "C4"] },
+            { "name": "Category D", "questions": ["D1", "D2", "D3", "D4"] },
+            { "name": "Category E", "questions": ["E1", "E2", "E3", "E4"] },
+            { "name": "Category F", "questions": ["F1", "F2", "F3", "F4"] }
+        ],
+    "img_url": "https://ibb.co/Gtx3h2k"
 }
 
-
 ### Update existing game
-PUT http://localhost:8000/games/0906ee7b-7353-4acf-9f54-24cdd46c8f46
+PUT http://localhost:8000/games/656a570d88e9275e1debc9e1
 Content-Type: application/json
 
 {
-    "title": "History"
+    "title": "Game 1"
 }
 
 ### Delete game
 
-DELETE http://localhost:8000/games/0906ee7b-7353-4acf-9f54-24cdd46c8f46
+DELETE http://localhost:8000/games/656a60eba8777f0c06520a0d

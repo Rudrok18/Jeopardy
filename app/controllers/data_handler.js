@@ -6,23 +6,16 @@ const fs = require('fs');
 const Game = require('./game');
 const path = require("path");
 
-let content = fs.readFileSync('app/data/games.json');
+const { generateUUID } = require("./utils");
+
 const gamesFilePath = path.join(__dirname, "..", "data", "games.json");
-let games = JSON.parse(content).map(Game.createFromObject);
-//console.table(games);
-
-function getGames() {
-    return games;
-}
-
-function getGameById(uuid) {
-    return games.find(game => game._uuid === uuid);
-}
+console.log(gamesFilePath);
 
 function readGamesFromFile() {
     try {
         const data = fs.readFileSync(gamesFilePath, 'utf8');
-        return JSON.parse(data).map(Game.createFromObject);
+        console.table(data);
+        return JSON.parse(data);
     } catch (error) {
         console.error('Error reading games from file: ', error);
         return [];
@@ -37,52 +30,48 @@ function writeGamesToFile(games) {
     }
 }
 
-function createGame(gameData) {
-    return fetch('https://localhost:8000/games', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(gameData),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .catch(error => console.error('Error:', error));
+function getGames() {
+    let data = readGamesFromFile();
+    return data;
 }
 
-function updateGame(id, updatedGameData) {
-    return fetch(`https://localhost:8000/games/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedGameData),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .catch(error => console.error('Error:', error));
+function getGameById(uuid) {
+    const games = readGamesFromFile();
+    return games.find(game => game.uuid === uuid);
 }
 
-function deleteGame(id) {
-    return fetch(`https://localhost:8000/games/${id}`, {
-        method: 'DELETE',
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .catch(error => console.error('Error:', error));
+function createGame(newGame) {
+    const games = readGamesFromFile();
+    newGame.uuid = generateUUID();
+    games.push(newGame);
+    writeGamesToFile(games);
+    return newGame;
 }
+
+function updateGame(uuid, updatedGame) {
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid == uuid);
+    if (index !== -1) {
+        games[index] = { ...games[index], ...updatedGame };
+        writeGamesToFile(games);
+        return games[index];
+    }
+
+    return null;
+}
+
+function deleteGame(uuid) {
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid === uuid);
+    if (index !== -1) {
+        const deletedGame = games.splice(index, 1)[0];
+        writeGamesToFile(games);
+        return deletedGame;
+    }
+    return null;
+}
+
+//readGamesFromFile();
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;

@@ -1,7 +1,85 @@
 "use strict";
 
-const utils = require('./utils');
+//const utils = require('./utils');
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://127.0.0.1:27017/UsersDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+
+const CategorySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    questions: {
+        type: [String],
+        required:true,
+        validate: {
+            validator: function(arr) {
+                return arr.length === 4;
+            },
+            message: 'Array must contain 4 questions'
+        }
+    }
+});
+
+const GameSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    categories: {
+        type: [CategorySchema], 
+        required: true,
+        validate: {
+            validator: function(arr) {
+                return arr.length === 6;
+            },
+            message: 'Array must contain 6 categories'
+        }
+    },
+    img_url: {
+        type: String,
+        required: true,
+        trim: true
+    }
+});
+
+const Game = mongoose.model('Game', GameSchema);
+
+/*
+const newGame = new Game({
+    title: 'Test game',
+    categories: [
+        { name: 'Category A', questions: ['A1', 'A2', 'A3', 'A4'] },
+        { name: 'Category B', questions: ['B1', 'B2', 'B3', 'B4'] },
+        { name: 'Category C', questions: ['C1', 'C2', 'C3', 'C4'] },
+        { name: 'Category D', questions: ['D1', 'D2', 'D3', 'D4'] },
+        { name: 'Category E', questions: ['E1', 'E2', 'E3', 'E4'] },
+        { name: 'Category F', questions: ['F1', 'F2', 'F3', 'F4'] }
+    ],
+    img_url: 'https://ibb.co/Gtx3h2k'
+})
+
+newGame.save()
+       .then(savedGame => {
+        console.log('Game saved:', savedGame)
+       })
+       .catch(error => {
+        console.error('Error saving the game', error)
+       });
+*/
+
+module.exports = Game;
+
+// Game creation with objects, ignore this
+
+/*
 class GameException {
     constructor(errorMessage) {
         this.errorMessage = errorMessage;
@@ -13,6 +91,7 @@ class CategoryException {
         this.errorMessage = errorMessage;
     }
 }
+
 
 class Game {
     constructor(title, categories, imgUrl) {
@@ -44,7 +123,7 @@ class Game {
 
     set title(value) {
         if (typeof value !== "string" || value === '') {
-            throw new GameException("Game title cannot be emty")
+            throw new GameException("Game title cannot be empty")
         }
         this._title = value;
     }
@@ -72,7 +151,7 @@ class Game {
     }
 
     static createFromJson(value) {
-        let obj = JSON.parse(jsonValue);
+        let obj = JSON.parse(value);
         return new Game(obj.title, obj.categories, obj.imgUrl)
     }
 
@@ -152,5 +231,4 @@ class Category {
         }
     }
 }
-module.exports = Game;
-    
+*/
