@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const fs = require('fs')
 const Game = require('./game')
@@ -24,7 +24,7 @@ function updateGame(uuid, updatedGame) {
     //pending
 }
 
-function deleteGame(uuid) {
+function deleteGame() {
     const gameIndex = games.findIndex(game => game.uuid === uuid);
     if (gameIndex !== -1) {
         games.splice(gameIndex, 1);
@@ -33,7 +33,7 @@ function deleteGame(uuid) {
     }
 }
 
-function findGame(query) {
+function findGame() {
     const [titleQuery] = query.split(':').map(item => item.trim());
 
     if (titleQuery) {
@@ -42,16 +42,6 @@ function findGame(query) {
         );
     }
 }
-
-function genBoard(){
-    //poner el título
-    document.getElementById("GameTitle").textContent = games[0].title;
-    //poner preguntas
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    genBoard();
-});
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
