@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -56,7 +56,6 @@ function updateGame(uuid, updatedGame) {
         writeGamesToFile(games);
         return games[index];
     }
-
     return null;
 }
 
@@ -71,7 +70,7 @@ function deleteGame(uuid) {
     return null;
 }
 
-//readGamesFromFile();
+
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
