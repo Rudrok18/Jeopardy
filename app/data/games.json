@@ -60,5 +60,68 @@
                 ]
             }
         ]
+    },
+
+    {
+        "_uuid": "2xxxxx",
+        "title": "Duck Game",
+        "categories": [
+            {
+                "name": "Duck Species",
+                "questions": [
+                    "What is the most common species of duck found in North America?",
+                    "Name a diving duck species known for it's stricking iridescent colors",
+                    "Which duck species is famous for its long migratory flights, often traveling thousands of miles?",
+                    "Identify the smallest species of duck in the world."
+                ]
+                
+                    
+            },
+            {
+                "name": "Duck Anatomy",
+                "questions": [
+                    "What is the name of the flat, broad part of a duck's bill?",
+                    "Ducks have a specialized gland near their tails. What is its purpose?",
+                    "What unique adaptation do ducks have to keep their feathers waterproof?",
+                    "Name the hard, horny plate in the duck's mouth used for filtering food from the water."
+                ]
+            },
+            {
+                "name": "Famous Ducks",
+                "questions": [
+                    "What is the name of the Disney cartoon duck who is Donald Duck's girlfriend?",
+                    "In literature, which children's book features a character named Jemima, a domestic duck?",
+                    "This famous animated duck made his debut in 1937 and often hangs out with his three nephews. Who is he?",
+                    "What is the name of the fictional duck detective created by Carl Barks?"
+                ]
+            },
+            {
+                "name": "Duck Habitats",
+                "questions": [
+                    "In what type of environment do Mallards typically prefer to live?",
+                    "Name a duck species that is commonly found in freshwater lakes and ponds.",
+                    "Which continent is home to the largest number of different duck species?",
+                    "What is the term for a group of ducks resting on the water"
+                ]
+            },
+            {
+                "name": "Duck Behavior",
+                "questions": [
+                    "What is the name of the courtship display performed by male ducks to attract females?",
+                    "Ducks are known for their quacking sounds. What is the term for a female duck's quack?",
+                    "What is the primary purpose of a duck's preening behavior?",
+                    "Identify a common feeding behavior of dabbling ducks."
+                ]
+            },
+            {
+                "name": "Duck Conservation",
+                "questions": [
+                    "What organization is known for its efforts in conserving wetlands and waterfowl habitats?",
+                    "What is the primary threat to many duck species in terms of habitat loss?",
+                    "Name a successful conservation program aimed at restoring the population of a specific endangered duck.",
+                    "What is the Migratory Bird Treaty Act, and how does it relate to duck conservation?"
+                ]
+            }
+        ]
     }
 ]
