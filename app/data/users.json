@@ -1,8 +1,18 @@
 [
     {
-        "idUser": 1,
-        "username": "Rodrigo Lopez Coronado",
+        "firstName": "Cristina",
+        "lastName": "Zaldivar",
+        "email": "cristinazaldivar@gmail.com",
+        "password": "123iteso",
+        "birthDate": "2023-12-1",
+        "sex": "M"
+    },
+    {
+        "firstName": "Rodrigo",
+        "lastName": "Lopez",
         "email": "rodrigolopezc03@gmail.com",
-        "password" : "iteso2003"
+        "password": "iteso123",
+        "birthDate": "2003-6-30",
+        "sex": "H"
     }
 ]

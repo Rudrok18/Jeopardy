@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: "Error updating game", error: error.message });
     }
-})
+});
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -64,6 +64,6 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: "Error deleting game", error: error.message });
     }
-})
+});
 
 module.exports = router;

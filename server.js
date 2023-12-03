@@ -1,5 +1,6 @@
 "use strict";
 
+process.env.TOKEN_KEY = "WelcomeJeopardy";
 const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();

@@ -1,9 +1,8 @@
 "use strict";
 
-//const utils = require('./utils');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/UsersDB', {
+mongoose.connect('mongodb://127.0.0.1:27017/Atlas', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -52,6 +51,8 @@ const GameSchema = new mongoose.Schema({
 
 const Game = mongoose.model('Game', GameSchema);
 
+module.exports = Game;
+
 /*
 const newGame = new Game({
     title: 'Test game',
@@ -74,8 +75,6 @@ newGame.save()
         console.error('Error saving the game', error)
        });
 */
-
-module.exports = Game;
 
 // Game creation with objects, ignore this
 

@@ -1,89 +1,113 @@
-/*"use strict";
+"use strict";
 
-const { generateUUID } = require("./utils");
+const mongoose = require('mongoose');
 
-class UserException {
-    constructor(errorMessage) {
-        this.errorMessage = errorMessage;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+let privateKey = process.env.TOKEN_KEY;
+
+mongoose.connect('mongodb://127.0.0.1:27017/Atlas', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6
+    },
+    birthDate: {
+        type: Date,
+        required: true
+    },
+    sex: {
+        type: String,
+        enum: ['H', 'M'],
+        required: true
+    },
+    profilePicture: {
+        type: String,
+    },
+    role: {
+        type: String,
+        enum: ['ADMIN', 'USER', 'GUEST'],
+        required: true
+    },
+    token: {
+        type: String,
+        required: true
+    },
+    access: {
+        type: String,
+        enum: ["guest", "registrated", "admin"],
+        required: true
+    }
+})
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
+
+const newUser = {
+    firstName: "Rodrigo",
+    lastName: "Lopez",
+    email: "rodrigolopezc03@gmail.com",
+    password: "iteso123",
+    birthDate: "2003-6-30",
+    sex: "H"
+};
+
+userSchema.pre('save', function(next){
+    let user = this;
+    user.password = bcrypt.hashSync(user.password, 10);
+    next();
+});
+
+userSchema.methods.generateToken = function(password) {
+    let user = this;
+    let payload = { id: user._id, role: user.role};
+    let options = {expireIn: 60 * 60};
+
+    if (bcrypt.compareSync(password, user.password)) {
+        try {
+            user.token = jwt.sign(payload, privateKey, options);
+            return user.token;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
-class User {
-    constructor(idUser, username, email, password) {
-        this.idUser = idUser;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+/*let user = User(newUser);
 
-    set idUser(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new UserException("ID cannot be emty")
-        }
-        this._idUser = value;
-    }
+user.save()
+    .then(doc => console.log(doc))
+    .catch(err => console.log(err));
 
-    get idUser() {
-        return this._idUser;
-    }
+console.log(user);
 
-    set username(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new UserException("Username cannot be emty")
-        }
-        this._username = value;
-    }
+User.find({}, (err, docs) => console.log(docs));
 
-    get username() {
-        return this._username;
-    }
+User.find({'sex': new RegExp('H', 'i')}, (err, docs) => console.log(docs));
 
-    set email(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new UserException("Email cannot be emty")
-        }
-        this._email = value;
-    }
+User.findById("656be591cc540ea48be09b88", (err, docs) => console.log(docs));
 
-    get email() {
-        return this._email;
-    }
-
-    set password(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new UserException("Password cannot be emty")
-        }
-        this._password = value;
-    }
-
-    get password() {
-        return this._password;
-    }
-
-    static createFromJson(value) {
-        let obj = JSON.parse(jsonValue);
-        return new User(obj.idUser, obj.username, obj.email, obj.password)
-    }
-
-    static createFromObject(obj) {
-        idUser = generateUUID();
-        this._username = username;
-        this._email = email;
-        this._password = password;
-        let cleanObj = this.cleanObject(obj);
-        return new User(cleanObj.idUser, cleanObj.username, cleanObj.email, cleanObj.password);
-    }
-
-    static cleanObject(obj) {
-        let cleanObj = {};
-        const validKeys = ["idUser", "username", "email", "password"];
-        for (let key of validKeys) {
-            if (obj.hasOwnProperty(key)) {
-                cleanObj[key] = obj[key];
-            }
-        }
-        return cleanObj;
-    }
-}
-
-module.exports = User;*/
+User.findOneAndUpdate({lastName: 'Lopez'}, {lastName: 'López'}, {new: true})
+    .then(doc) => {console.log(doc) })
+    .catch(error) => {console.log(error) });
+    
+User.findByIdAndDelete("656be591cc540ea48be09b88", (err, doc) => { console.log(doc)});
+*/

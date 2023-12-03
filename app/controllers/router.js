@@ -3,21 +3,22 @@
 const express = require('express');
 const router = express.Router();
 const gameRouter = require('./../routes/games');
-const adminGameRouter = require('./../routes/admin_games');
+const userRouter = require('./../routes/users');
+const tokenUtils = require('./../controllers/token_utils');
+const dataHandler = require('./data_handler_users')
 
 router.use('/games', gameRouter);
-router.use('/admin_games', validateAdmin, adminGameRouter)
+router.use('/users', userRouter);
+
+router.use('/:email', tokenUtils.verifyToken);
 
 router.get('/', (req, res) => {
     res.send("Final Project Jeopardy");
-})
+});
 
-function validateAdmin(req, res, next) {
-    let adminToken = req.get('x-auth');
-    if (adminToken == undefined || adminToken != "admin") {
-        res.status(403).send("Not authenticated");
-    }
-    next();
-}
+// Login
+
+router.route('/login')
+      .post((req, res) => dataHandler.login(req, res));
 
 module.exports = router;
