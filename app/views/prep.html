@@ -4,10 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Prep page</title>
-        <link href="style.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   
         <style>
+            
+            
+
             .title-container{
                 margin-left: 50px;
             }
@@ -54,7 +56,7 @@
             <a class="btn btn-outline-dark col-4" href="board.html">Start game</a>
         </div>
         <div class="table-teams">
-            <table class="table" width="100%">
+            <table class="table" width="100%" id="table-teams">
                 <thead>
                     <th>Add the teams</th>
                 </thead>
@@ -65,13 +67,13 @@
                                 <button class="btn btn-secondary dropdown-toggle d-flex justify-content-between"  href="#" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Select
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">2 Teams</a></li>
-                                    <li><a class="dropdown-item" href="#">3 Teams</a></li>
-                                    <li><a class="dropdown-item" href="#">4 Teams</a></li>
-                                    <li><a class="dropdown-item" href="#">5 Teams</a></li>
-                                    <li><a class="dropdown-item" href="#">6 Teams</a></li>
-                                </ul>
+                                <diV class="dropdown-menu" id="teamNum">
+                                    <li><a class="dropdown-item" href="#" data-teams="2">2</a></li>
+                                    <li><a class="dropdown-item" href="#" data-teams="3">3</a></li>
+                                    <li><a class="dropdown-item" href="#" data-teams="4">4</a></li>
+                                    <li><a class="dropdown-item" href="#" data-teams="5">5</a></li>
+                                    <li><a class="dropdown-item" href="#" data-teams="6">6</a></li>
+                                </diV>
                             </div>
                         </td>
                         <td rowspan="4">
@@ -117,36 +119,36 @@
                     <tr>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="team1" placeholder="Team 1">
+                                <input type="text" class="form-control team-input" id="team1" placeholder="Team 1">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="team2" placeholder="Team 2">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="team3" placeholder="Team 3">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="team4" placeholder="Team 4">
+                                <input type="text" class="form-control team-input" id="team2" placeholder="Team 2">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="team5" placeholder="Team 5">
+                                <input type="text" class="form-control team-input" id="team3" placeholder="Team 3">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="team6" placeholder="Team 6">
+                                <input type="text" class="form-control team-input" id="team4" placeholder="Team 4">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control team-input" id="team5" placeholder="Team 5">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control team-input" id="team6" placeholder="Team 6">
                             </div>
                         </td>
                     </tr>
@@ -154,6 +156,32 @@
             </table>
         </div>
         <script>
+
+            /*document.addEventListener('DOMContentLoaded', function () {
+                var numTeams = document.getElementById('teamNum');
+                var teamInputs = document.querySelectorAll('[id^="team"]');
+                var teamsTable = document.getElementById('table-teams');
+
+                numTeams.addEventListener('show.bs.dropdown', function () {
+                    var selectedTeams = parseInt(dropdown.querySelector('.btn').innerText); 
+                    console.log("Hola");
+
+                    teamInputs.forEach(function (input) {
+                        input.style.display = 'none';
+                    });
+
+                    for (var i = 1; i <= selectedTeams; i++) {
+                        document.querySelector('.team-input:nth-child(' + i + ')').style.display = 'block';
+                    }
+
+                    if (backLight.checked) {
+                        teamsTable.style.backgroundColor = 'white';
+                    } else if (backDark.checked) {
+                        teamsTable.style.backgroundColor = 'darkgray';
+                    }
+                });
+            });
+
             document.addEventListener('DOMContentLoaded', function () {
                 var musicOn = document.getElementById('musicRadioOn');
                 var musicOff = document.getElementById('musicRadioOff');
@@ -171,7 +199,26 @@
                         audio.currentTime = 0;
                     }
                 });
+            });*/
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var blight = document.getElementById('backLight');
+                var bdark = document.getElementById('backDark');
+                var body = document.body;
+                        
+                backLight.addEventListener('input', function () {
+                    if (blight.checked) {
+                        body.style.backgroundColor = 'white';
+                    }
+                });
+        
+                backDark.addEventListener('input', function () {
+                    if (bdark.checked) {
+                        body.style.backgroundColor = 'darkgray';
+                    }
+                });
             });
+
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
