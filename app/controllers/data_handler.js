@@ -3,9 +3,9 @@
 const fs = require('fs')
 const Game = require('./game')
 
-let content = fs.readFileSync('app/data/games.json');
+/*let content = fs.readFileSync('app/data/games.json');
 let games = JSON.parse(fs.readFileSync("./app/data/games.json"));
-const gameNow = games[0];
+const gameNow = games[0];*/
 
 console.table(games);
 
@@ -45,7 +45,7 @@ function findGame(query) {
     }
 }
 
-function genBoard(games){
+/*function genBoard(games){
   gameNow = games[0];
     return `
     <table width="100%">
@@ -122,7 +122,7 @@ function shModalQuestion(games){
     </div>
   </div>
   `
-}
+}*/
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
