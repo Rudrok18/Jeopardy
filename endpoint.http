@@ -1,0 +1,73 @@
+### Get all games
+GET http://localhost:8000/games
+
+### Get game by ID (replace :id with accurate user ID)
+
+GET http://localhost:8000/games/:id
+
+### Post new game 
+
+POST http://localhost:8000/games
+Content-Type: application/json
+
+{
+    "title": "Game 3",
+        "categories": [
+            { "name": "Category A", "questions": ["A1", "A2", "A3", "A4"] },
+            { "name": "Category B", "questions": ["B1", "B2", "B3", "B4"] },
+            { "name": "Category C", "questions": ["C1", "C2", "C3", "C4"] },
+            { "name": "Category D", "questions": ["D1", "D2", "D3", "D4"] },
+            { "name": "Category E", "questions": ["E1", "E2", "E3", "E4"] },
+            { "name": "Category F", "questions": ["F1", "F2", "F3", "F4"] }
+        ],
+    "img_url": "https://ibb.co/Gtx3h2k"
+}
+
+### Update existing game (replace :id with accurate user ID)
+PUT http://localhost:8000/games/:id
+Content-Type: application/json
+
+{
+    "title": "Game e"
+}
+
+### Delete game (replace :id with accurate user ID)
+
+DELETE http://localhost:8000/games/:id
+
+### Get users
+
+GET http://localhost:8000/users
+
+### Get user by ID (replace :id with accurate user ID)
+
+GET http://localhost:8000/users/:id
+
+### Get user by email (with middleware)
+
+### Create new user
+
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "firstName": "Cristina",
+    "lastName": "Zaldivar",
+    "email": "cristinazaldivar@gmail.com",
+    "password": "123iteso",
+    "birthDate": "2023-12-1",
+    "sex": "M"
+}
+
+### Edit user (replace :id with accurate user ID)
+
+PUT http://localhost:8000/users/:id
+Content-Type: application/json
+
+{
+    "lastName": "López" 
+}
+
+### Delete user (replace :id with accurate user ID)
+
+DELETE http://localhost:8000/users/:id

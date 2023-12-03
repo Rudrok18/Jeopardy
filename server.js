@@ -1,6 +1,7 @@
 "use strict";
 
-/*const express = require('express');
+process.env.TOKEN_KEY = "WelcomeJeopardy";
+const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();
 const port = 8000;
@@ -20,12 +21,6 @@ app.use(router);
 app.listen(port, () => {
     console.log(`Jeopardy listening on port ${port}!`);
 })
-
-
-router.route('/:id')
-    .get((req, res) => {
-        
-    })
 
 router.route('/,/start')
     .get((req, res) => {
@@ -63,4 +58,3 @@ router.route('/,/board')
     })
 
 module.exports = router;
-*/

@@ -1,64 +1,41 @@
 [
-    {
-        "_uuid": "1xxxxx",
-        "title": "Juego 1",
+  {
+    "uuid": "0fbf63a7-d596-44dd-ab73-d618a1aed1d1",
+    "title": "Game 1",
         "categories": [
-            {
-                "name": "Categoria A",
-                "questions": [
-                    "A1",
-                    "A2",
-                    "A3",
-                    "A4"
-                ]
-                
-                    
-            },
-            {
-                "name": "Categoria B",
-                "questions": [
-                    "B1",
-                    "B2",
-                    "B3",
-                    "B4"
-                ]
-            },
-            {
-                "name": "Categoria C",
-                "questions": [
-                    "C1",
-                    "C2",
-                    "C3",
-                    "C4"
-                ]
-            },
-            {
-                "name": "Categoria D",
-                "questions": [
-                    "D1",
-                    "D2",
-                    "D3",
-                    "D4"
-                ]
-            },
-            {
-                "name": "Categoria E",
-                "questions": [
-                    "E1",
-                    "E2",
-                    "E3",
-                    "E4"
-                ]
-            },
-            {
-                "name": "Categoria F",
-                "questions": [
-                    "F1",
-                    "F2",
-                    "F3",
-                    "F4"
-                ]
-            }
-        ]
-    }
+            { "name": "Category A", "questions": ["A1", "A2", "A3", "A4"] },
+            { "name": "Category B", "questions": ["B1", "B2", "B3", "B4"] },
+            { "name": "Category C", "questions": ["C1", "C2", "C3", "C4"] },
+            { "name": "Category D", "questions": ["D1", "D2", "D3", "D4"] },
+            { "name": "Category E", "questions": ["E1", "E2", "E3", "E4"] },
+            { "name": "Category F", "questions": ["F1", "F2", "F3", "F4"] }
+        ],
+    "img_url": "https://ibb.co/Gtx3h2k"
+  },
+  {
+    "uuid": "1fbf63a7-d596-44dd-ab73-d618a1aed1d1",
+    "title": "Game 2",
+        "categories": [
+            { "name": "Category A", "questions": ["A1", "A2", "A3", "A4"] },
+            { "name": "Category B", "questions": ["B1", "B2", "B3", "B4"] },
+            { "name": "Category C", "questions": ["C1", "C2", "C3", "C4"] },
+            { "name": "Category D", "questions": ["D1", "D2", "D3", "D4"] },
+            { "name": "Category E", "questions": ["E1", "E2", "E3", "E4"] },
+            { "name": "Category F", "questions": ["F1", "F2", "F3", "F4"] }
+        ],
+    "img_url": "https://ibb.co/Gtx3h2k"
+  },
+  {
+    "uuid": "2fbf63a7-d596-44dd-ab73-d618a1aed1d1",
+    "title": "Game 3",
+        "categories": [
+            { "name": "Category A", "questions": ["A1", "A2", "A3", "A4"] },
+            { "name": "Category B", "questions": ["B1", "B2", "B3", "B4"] },
+            { "name": "Category C", "questions": ["C1", "C2", "C3", "C4"] },
+            { "name": "Category D", "questions": ["D1", "D2", "D3", "D4"] },
+            { "name": "Category E", "questions": ["E1", "E2", "E3", "E4"] },
+            { "name": "Category F", "questions": ["F1", "F2", "F3", "F4"] }
+        ],
+    "img_url": "https://ibb.co/Gtx3h2k"
+  }
 ]

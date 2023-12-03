@@ -1,57 +1,76 @@
 'use strict';
 
-const fs = require('fs')
-const Game = require('./game')
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-let content = fs.readFileSync('app/data/games.json');
-let games = JSON.parse(content).map(Game.createFromObject);
-//console.table(games);
+const fs = require('fs');
+const Game = require('./game');
+const path = require("path");
+
+const { generateUUID } = require("./utils");
+
+const gamesFilePath = path.join(__dirname, "..", "data", "games.json");
+console.log(gamesFilePath);
+
+function readGamesFromFile() {
+    try {
+        const data = fs.readFileSync(gamesFilePath, 'utf8');
+        console.table(data);
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading games from file: ', error);
+        return [];
+    }
+}
+
+function writeGamesToFile(games) {
+    try {
+        fs.writeFileSync(gamesFilePath, JSON.stringify(games, null, 2), 'utf8');
+    } catch (error) {
+        console.error('Error writing games to file: ', error);
+    }
+}
 
 function getGames() {
-    return games;
+    let data = readGamesFromFile();
+    return data;
 }
 
 function getGameById(uuid) {
-    return games.find(game => game._uuid === uuid);
+    const games = readGamesFromFile();
+    return games.find(game => game.uuid === uuid);
 }
 
-function createGame(game) {
-    games.push(Game.createFromObject(game));
-    
+function createGame(newGame) {
+    const games = readGamesFromFile();
+    newGame.uuid = generateUUID();
+    games.push(newGame);
+    writeGamesToFile(games);
+    return newGame;
 }
 
 function updateGame(uuid, updatedGame) {
-    //pending
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid == uuid);
+    if (index !== -1) {
+        games[index] = { ...games[index], ...updatedGame };
+        writeGamesToFile(games);
+        return games[index];
+    }
+    return null;
 }
 
 function deleteGame(uuid) {
-    const gameIndex = games.findIndex(game => game.uuid === uuid);
-    if (gameIndex !== -1) {
-        games.splice(gameIndex, 1);
-    } else {
-        throw new Error("Game not found")
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid === uuid);
+    if (index !== -1) {
+        const deletedGame = games.splice(index, 1)[0];
+        writeGamesToFile(games);
+        return deletedGame;
     }
+    return null;
 }
 
-function findGame(query) {
-    const [titleQuery] = query.split(':').map(item => item.trim());
 
-    if (titleQuery) {
-        return games.filter(game =>
-            game.title.includes(titleQuery)
-        );
-    }
-}
-
-function genBoard(){
-    //poner el título
-    document.getElementById("GameTitle").textContent = games[0].title;
-    //poner preguntas
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    genBoard();
-});
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
