@@ -1,7 +1,84 @@
 "use strict";
 
-const utils = require('./utils');
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://127.0.0.1:27017/Atlas', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+
+const CategorySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    questions: {
+        type: [String],
+        required:true,
+        validate: {
+            validator: function(arr) {
+                return arr.length === 4;
+            },
+            message: 'Array must contain 4 questions'
+        }
+    }
+});
+
+const GameSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    categories: {
+        type: [CategorySchema], 
+        required: true,
+        validate: {
+            validator: function(arr) {
+                return arr.length === 6;
+            },
+            message: 'Array must contain 6 categories'
+        }
+    },
+    img_url: {
+        type: String,
+        required: true,
+        trim: true
+    }
+});
+
+const Game = mongoose.model('Game', GameSchema);
+
+module.exports = Game;
+
+/*
+const newGame = new Game({
+    title: 'Test game',
+    categories: [
+        { name: 'Category A', questions: ['A1', 'A2', 'A3', 'A4'] },
+        { name: 'Category B', questions: ['B1', 'B2', 'B3', 'B4'] },
+        { name: 'Category C', questions: ['C1', 'C2', 'C3', 'C4'] },
+        { name: 'Category D', questions: ['D1', 'D2', 'D3', 'D4'] },
+        { name: 'Category E', questions: ['E1', 'E2', 'E3', 'E4'] },
+        { name: 'Category F', questions: ['F1', 'F2', 'F3', 'F4'] }
+    ],
+    img_url: 'https://ibb.co/Gtx3h2k'
+})
+
+newGame.save()
+       .then(savedGame => {
+        console.log('Game saved:', savedGame)
+       })
+       .catch(error => {
+        console.error('Error saving the game', error)
+       });
+*/
+
+// Game creation with objects, ignore this
+
+/*
 class GameException {
     constructor(errorMessage) {
         this.errorMessage = errorMessage;
@@ -13,6 +90,7 @@ class CategoryException {
         this.errorMessage = errorMessage;
     }
 }
+
 
 class Game {
     constructor(title, categories, imgUrl) {
@@ -44,7 +122,7 @@ class Game {
 
     set title(value) {
         if (typeof value !== "string" || value === '') {
-            throw new GameException("Game title cannot be emty")
+            throw new GameException("Game title cannot be empty")
         }
         this._title = value;
     }
@@ -65,57 +143,68 @@ class Game {
     }
 
     set imgUrl(value) {
-        if (typeof value !== "string") {
-            throw new ProductException("Image url cannot be empty");
+        if (typeof value !== "string" || value === '') {
+            throw new GameException("Image url cannot be empty");
         }
         this._imgUrl = value;
     }
 
-    static createFromJson(jsonValue) {
-        let obj = JSON.parse(jsonValue);
-        return Game.createFromObject(obj);
+    static createFromJson(value) {
+        let obj = JSON.parse(value);
+        return new Game(obj.title, obj.categories, obj.imgUrl)
     }
 
     static createFromObject(obj) {
-        let newGame = {};
+        let newGame = {}
         Object.assign(newGame, obj);
         Game.cleanObject(newGame);
 
-        //game._uuid = utils.generateUUID();
+        let game = new Game(obj.title, obj.categories, obj.imgUrl);
+        //game._uuid = obj.uuid;
 
-        return new Game(newGame.title, newGame.categories, newGame.imgUrl);
+        return game;
     }
 
-    static cleanObject(obj) {
-        const gameProperties = ['_uuid', 'title', 'categories', 'imgUrl'];
-        for (let prop in obj) {
-            if (!gameProperties.includes(prop)) {
-                delete obj[prop];
-            } else if (prop === 'categories' && Array.isArray(obj[prop])) {
-                obj[prop].forEach(category => {
-                    for (let categoryProp in category) {
-                        if (categoryProp !== 'name' && categoryProp !== 'questions') {
-                            delete category[categoryProp];
-                        }
-                    }
-                });
-            }
-        }
+
+    static cleanObject(gameObj) {
+        const allowedGameProperties = ['_uuid', 'title', 'categories', 'imgUrl'];
+        const allowedCategoryProperties = ['name', 'questions'];
+
+        const filteredObj = Object.keys(gameObj)
+            .filter(key => allowedGameProperties.includes(key))
+            .reduce((acc, key) => {
+                if (key === 'categories') {
+                    acc[key] = gameObj[key].map(category => {
+                        return Object.keys(category)
+                            .filter(categoryKey => allowedCategoryProperties.includes(categoryKey))
+                            .reduce((catAcc, categoryKey) => {
+                                catAcc[categoryKey] = category[categoryKey];
+                                return catAcc;
+                            }, {});
+                    });
+                } else {
+                    acc[key] = gameObj[key];
+                }
+                return acc;
+            }, {});
+
+        return filteredObj;
     }
 }
 
 class Category {
     constructor(name, questions) {
         this.name = name;
-        this.questions = this.limitQuestions(questions);
+        this._questions = this.limitQuestions(questions);
     }
 
     limitQuestions(questions) {
-        if (questions.length !== 4) {
-            throw new Error("4 quesitons required");
+        if (Array.isArray(questions) && questions.length === 4 && questions.every(item => typeof item === 'string')) {
+            return questions;
+        } else {
+            console.error('Questions must be an array of strings.');
+            return [];
         }
-
-        return questions;
     }
 
     get name() {
@@ -133,13 +222,12 @@ class Category {
         return this._questions;
     }
 
-    set questions(value) {
-        if (typeof value !== "string" || value === '') {
-            throw new CategoryException("Questions cannot be emty")
+    set questions(value){
+        if (Array.isArray(newQuestions) && newQuestions.length === 4 && newQuestions.every(item => typeof item === 'string')) {
+            this._questions = newQuestions;
+        } else {
+            console.error('Questions must be an array of 4 strings');
         }
-        this._questions = value;
     }
 }
-
-module.exports = Game;
-module.exports = Category;
+*/
