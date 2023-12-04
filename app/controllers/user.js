@@ -67,7 +67,10 @@ const newUser = {
     email: "rodrigolopezc03@gmail.com",
     password: "iteso123",
     birthDate: "2003-6-30",
-    sex: "H"
+    sex: "H",
+    role: "ADMIN",
+    token: "WelcomeJeopardy",
+    access: "admin"
 };
 
 userSchema.pre('save', function(next){

@@ -3,7 +3,7 @@ GET http://localhost:8000/games
 
 ### Get game by ID (replace :id with accurate user ID)
 
-GET http://localhost:8000/games/:id
+GET http://localhost:8000/games/656d50255b427c29c45466c1
 
 ### Post new game 
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### Update existing game (replace :id with accurate user ID)
-PUT http://localhost:8000/games/:id
+PUT http://localhost:8000/games/656d50255b427c29c45466c1
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ### Delete game (replace :id with accurate user ID)
 
-DELETE http://localhost:8000/games/:id
+DELETE http://localhost:8000/games/656d50255b427c29c45466c1
 
 ### Get users
 
@@ -41,7 +41,7 @@ GET http://localhost:8000/users
 
 ### Get user by ID (replace :id with accurate user ID)
 
-GET http://localhost:8000/users/:id
+GET http://localhost:8000/users/656d4fe35b427c29c45466af
 
 ### Get user by email (with middleware)
 
@@ -51,23 +51,26 @@ POST http://localhost:8000/users
 Content-Type: application/json
 
 {
-    "firstName": "Cristina",
-    "lastName": "Zaldivar",
-    "email": "cristinazaldivar@gmail.com",
-    "password": "123iteso",
-    "birthDate": "2023-12-1",
-    "sex": "M"
+    "firstName": "Juan",
+    "lastName": "Perez",
+    "email": "juanperez@gmail.com",
+    "password": "iteso2023",
+    "birthDate": "2000-1-1",
+    "sex": "H",
+    "role": "USER",
+    "token": "WelcomeJeopardy",
+    "access": "registrated"
 }
 
 ### Edit user (replace :id with accurate user ID)
 
-PUT http://localhost:8000/users/:id
+PUT http://localhost:8000/users/656d4fe35b427c29c45466af
 Content-Type: application/json
 
 {
-    "lastName": "López" 
+    "token": "null" 
 }
 
 ### Delete user (replace :id with accurate user ID)
 
-DELETE http://localhost:8000/users/:id
+DELETE http://localhost:8000/users/656d4fe35b427c29c45466af

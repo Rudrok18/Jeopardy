@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Board</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
@@ -20,7 +19,7 @@
       font-weight: bold;
     }
     .questions{
-      
+      background-color: lightgrey;
       width: 150px;
       height: 100px;
       border-radius: 10px;
@@ -32,56 +31,62 @@
     th, td{
       padding: 10px
     }
+   
+    .questions.clicked{
+      background-color: violet;
+    }
   </style>
 </head>
 
 <body>
-  
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="nav.html">Jeopardy</a>
+  </nav>
   <table width="100%">
     <thead>
-      <h2 class="text-center" id="GameTitle"></h2>
+      <h2 class="text-center" id="GameTitle">Duck Game</h2>
       
     </thead>
     <tbody>
       <tr class="category">
-        <td>Category #1</td>
-        <td>Category #2</td>
-        <td>Category #3</td>
-        <td>Category #4</td>
-        <td>Category #5</td>
-        <td>Category #6</td>
+        <td>Duck Species</td>
+        <td>Duck Anatomy</td>
+        <td>Famous Ducks</td>
+        <td>Duck Habitats</td>
+        <td>Duck Behavior</td>
+        <td>Duck Conservation</td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">400</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">300</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">200</button></td>
       </tr>
       <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
+        <td><button type="button" class="questions" onclick="changeColor(this)" data-toggle="modal" data-target="#modal_questions">100</button></td>
       </tr>
     </tbody>
     
@@ -90,17 +95,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="question">Question</h5>
+          <h5 class="modal-title" id="question">What is the name of the Disney cartoon duck who is Donald Duck's girlfriend?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <button type="button" class="btn btn-primary" id="btnShowAns">Show answer</button>
-          <p id="answer">Answer</p>
           <button type="button" class="btn btn-primary" id="btnCorrect">Correct</button>
           <button type="button" class="btn btn-primary" id="btnIncorrect">Incorrect</button>
-        </div>
         </div>
       </div>
     </div>
@@ -116,26 +118,64 @@
           </button>
         </div>
         <div class="modal-body">
-          <h2>Congratulations Team #1!</h2>
-          <p>Team points</p>
-          <button type="button" class="btn btn-primary">Play again</button>
-        </div>
+          <h2>Congratulations</h2>
+          <p>6300 points</p>
+          <button type="button" class="btn btn-primary" id="btnPlayAgain" href="board.html">Play again</button>
         </div>
       </div>
     </div>
   </div>
+  
+  <script>
+    let clickedButtons = 0;
+    function changeColor(button){
+      button.classList.add('clicked');
+      clickedButtons++;
 
-  <script src="app/controllers/data_handler.js"></script>
+      if (clickedButtons === 24){
+        displayQuestionsModal();
+      }
+    }
+    function displayQuestionsModal(){
+      const modal = document.getElementById('modal_questions');
+      modal.style.display= 'block';
+
+      $('#modal_questions').on('hidden.bs.modal', function(e) {
+        displayEndGame();
+      });
+    }
+    function displayEndGame(){
+      $('#modal_end').modal('show');
+    }
+
+    document.getElementById('btnPlayAgain').addEventListener('click', function () {
+      location.reload();
+    });
+
+    document.getElementById('btnShowAns').addEventListener('click', function () {
+      document.getElementById('answer').style.display = 'block';
+    });
+
+   
+  </script>
+ 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-bH5Z2RTtBLTlSSSEAtUD8l7/pxOJednPA2M0eHCOh5td8SyXuZsJSotW8E+86A"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
+  <script src="../controllers/data_handler.js"></script>
+  <script src="../controllers/game.js"></script>
+  <script src="../controllers/router.js"></script>
+  <script src="../controllers/utils.js"></script>
+  <script src="../data/games.json"></script>
+    
 </body>
 
 </html>
