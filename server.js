@@ -1,5 +1,6 @@
 "use strict";
 
+process.env.TOKEN_KEY = "WelcomeJeopardy";
 const express = require('express');
 const router = require('./app/controllers/router');
 const app = express();
@@ -14,19 +15,12 @@ const routeEdit_Page = path.join(__dirname, 'app', 'views', 'edit_page.html');
 const routePrep = path.join(__dirname, 'app', 'views', 'prep.html');
 const routeBoard = path.join(__dirname, 'app', 'views', 'board.html');
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(router);
 
 app.listen(port, () => {
     console.log(`Jeopardy listening on port ${port}!`);
 })
-
-
-router.route('/:id')
-    .get((req, res) => {
-        
-    })
 
 router.route('/,/start')
     .get((req, res) => {
@@ -57,6 +51,13 @@ router.route('/,/prep')
     .get((req, res) => {
         res.status(200).sendFile(routePrep);
     })
+
+router.route('/,/board')
+    .get((req, res) => {
+        res.status(200).sendFile(routeBoard);
+    })
+
+module.exports = router;
 
 router.route('/,/board')
     .get((req, res) => {
