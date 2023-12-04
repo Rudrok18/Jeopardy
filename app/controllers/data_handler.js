@@ -1,11 +1,38 @@
-"use strict";
+'use strict';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-console.table(games);
+const fs = require('fs');
+const Game = require('./game');
+const path = require("path");
+
+const { generateUUID } = require("./utils");
+
+const gamesFilePath = path.join(__dirname, "..", "data", "games.json");
+console.log(gamesFilePath);
+
+function readGamesFromFile() {
+    try {
+        const data = fs.readFileSync(gamesFilePath, 'utf8');
+        console.table(data);
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading games from file: ', error);
+        return [];
+    }
+}
+
+function writeGamesToFile(games) {
+    try {
+        fs.writeFileSync(gamesFilePath, JSON.stringify(games, null, 2), 'utf8');
+    } catch (error) {
+        console.error('Error writing games to file: ', error);
+    }
+}
 
 function getGames() {
-    
+    let data = readGamesFromFile();
+    return data;
 }
 
 function getGameById(uuid) {
@@ -13,7 +40,7 @@ function getGameById(uuid) {
     return games.find(game => game.uuid === uuid);
 }
 
-function createGame(game) {
+function createGame(newGame) {
     const games = readGamesFromFile();
     newGame.uuid = generateUUID();
     games.push(newGame);
@@ -22,106 +49,28 @@ function createGame(game) {
 }
 
 function updateGame(uuid, updatedGame) {
-    //pending
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid == uuid);
+    if (index !== -1) {
+        games[index] = { ...games[index], ...updatedGame };
+        writeGamesToFile(games);
+        return games[index];
+    }
+    return null;
 }
 
 function deleteGame(uuid) {
-    const gameIndex = games.findIndex(game => game.uuid === uuid);
-    if (gameIndex !== -1) {
-        games.splice(gameIndex, 1);
-    } else {
-        throw new Error("Game not found")
+    const games = readGamesFromFile();
+    const index = games.findIndex(game => game.uuid === uuid);
+    if (index !== -1) {
+        const deletedGame = games.splice(index, 1)[0];
+        writeGamesToFile(games);
+        return deletedGame;
     }
+    return null;
 }
 
-function findGame(query) {
-    const [titleQuery] = query.split(':').map(item => item.trim());
 
-    if (titleQuery) {
-        return games.filter(game =>
-            game.title.includes(titleQuery)
-        );
-    }
-}
-
-/*function genBoard(games){
-  gameNow = games[0];
-    return `
-    <table width="100%">
-    <thead>
-      <h2 class="text-center" id="GameTitle">${gameNow._title}</h2>
-      
-    </thead>
-    <tbody>
-      <tr class="category">
-        <td id="cat1">${gameNow.categories[0]}</td>
-        <td id="cat2">${gameNow.categories[1]}</td>
-        <td id="cat3">${gameNow.categories[2]}</td>
-        <td id="cat4">${gameNow.categories[3]}</td>
-        <td id="cat5">${gameNow.categories[4]}</td>
-        <td id="cat6">${gameNow.categories[5]}</td>
-      </tr> 
-      <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">400</button></td>
-      </tr>
-      <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">300</button></td>
-      </tr>
-      <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">200</button></td>
-      </tr>
-      <tr>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-        <td><button type="button" class="questions" data-toggle="modal" data-target="#modal_questions">100</button></td>
-      </tr>
-    </tbody>
-    
-  </table>
-  `
-}
-
-function shModalQuestion(games){
-  return `
-  <div id="modal_questions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="question">Question</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <button type="button" class="btn btn-primary" id="btnShowAns">Show answer</button>
-          <p id="answer">Answer</p>
-          <button type="button" class="btn btn-primary" id="btnCorrect">Correct</button>
-          <button type="button" class="btn btn-primary" id="btnIncorrect">Incorrect</button>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  `
-}*/
 
 exports.getGames = getGames;
 exports.getGameById = getGameById;
