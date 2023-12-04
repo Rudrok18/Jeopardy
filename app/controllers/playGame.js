@@ -79,6 +79,60 @@ function modalQuestionToHtml(game){
     `
 }
 
+function HtmlToGame(game){
+    game._title = document.getElementById(GameTitle);
+
+    game._categories[0]._name = document.getElementById(CatA);
+    game._categories[1]._name = document.getElementById(CatB);
+    game._categories[2]._name = document.getElementById(CatC);
+    game._categories[3]._name = document.getElementById(CatD);
+    game._categories[4]._name = document.getElementById(CatE);
+    game._categories[5]._name = document.getElementById(CatF);
+
+    game._categories[0]._questions[0] = document.getElementById(Preg1A);
+    game._categories[0]._questions[1] = document.getElementById(Preg1B);
+    game._categories[0]._questions[2] = document.getElementById(Preg1C);
+    game._categories[0]._questions[3] = document.getElementById(Preg1D);
+    game._categories[0]._questions[4] = document.getElementById(Preg1E);
+    game._categories[0]._questions[5] = document.getElementById(Preg1F);
+
+    game._categories[1]._questions[0] = document.getElementById(Preg2A);
+    game._categories[1]._questions[1] = document.getElementById(Preg2B);
+    game._categories[1]._questions[2] = document.getElementById(Preg2C);
+    game._categories[1]._questions[3] = document.getElementById(Preg2D);
+    game._categories[1]._questions[4] = document.getElementById(Preg2E);
+    game._categories[1]._questions[5] = document.getElementById(Preg2F);
+
+    game._categories[2]._questions[0] = document.getElementById(Preg3A);
+    game._categories[2]._questions[1] = document.getElementById(Preg3B);
+    game._categories[2]._questions[2] = document.getElementById(Preg3C);
+    game._categories[2]._questions[3] = document.getElementById(Preg3D);
+    game._categories[2]._questions[4] = document.getElementById(Preg3E);
+    game._categories[2]._questions[5]= document.getElementById(Preg3F);
+
+    game._categories[3]._questions[0] = document.getElementById(Preg4A);
+    game._categories[3]._questions[1] = document.getElementById(Preg4B);
+    game._categories[3]._questions[2] = document.getElementById(Preg4C);
+    game._categories[3]._questions[3] = document.getElementById(Preg4D);
+    game._categories[3]._questions[4] = document.getElementById(Preg4E);
+    game._categories[3]._questions[5] = document.getElementById(Preg4F);
+
+    game._categories[4]._questions[0] = document.getElementById(Preg5A);
+    game._categories[4]._questions[1] = document.getElementById(Preg5B);
+    game._categories[4]._questions[2]= document.getElementById(Preg5C);
+    game._categories[4]._questions[3]= document.getElementById(Preg5D);
+    game._categories[4]._questions[4] = document.getElementById(Preg5E);
+    game._categories[4]._questions[5] = document.getElementById(Preg5F);
+
+    game._categories[5]._questions[0] = document.getElementById(Preg6A);
+    game._categories[5]._questions[1] = document.getElementById(Preg6B);
+    game._categories[5]._questions[2] = document.getElementById(Preg6C);
+    game._categories[5]._questions[3] = document.getElementById(Preg6D);
+    game._categories[5]._questions[4] = document.getElementById(Preg6E);
+    game._categories[5]._questions[5] = document.getElementById(Preg6F);
+
+    return game;
+}
 
 
 
