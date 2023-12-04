@@ -2,11 +2,6 @@
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-const fs = require('fs')
-const Game = require('./game')
-
-
-
 console.table(games);
 
 function getGames() {
