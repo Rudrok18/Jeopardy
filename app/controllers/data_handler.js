@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
 const fs = require('fs')
 const Game = require('./game')
 
-let content = fs.readFileSync('app/data/games.json');
+/*let content = fs.readFileSync('app/data/games.json');
 let games = JSON.parse(fs.readFileSync("./app/data/games.json"));
-const gameNow = games[0];
+const gameNow = games[0];*/
 
-console.table(games);
+//console.table(games);
 
 function getGames() {
-    return games;
+    return data;
 }
 
 function getGameById(uuid) {
@@ -44,7 +44,6 @@ function findGame(query) {
         );
     }
 }
-
 
 
 exports.getGames = getGames;
