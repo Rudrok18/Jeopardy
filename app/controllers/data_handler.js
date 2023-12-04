@@ -1,25 +1,29 @@
 "use strict";
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const fs = require('fs')
 const Game = require('./game')
 
-/*let content = fs.readFileSync('app/data/games.json');
-let games = JSON.parse(fs.readFileSync("./app/data/games.json"));
-const gameNow = games[0];*/
+
 
 console.table(games);
 
 function getGames() {
-    return games;
+    
 }
 
 function getGameById(uuid) {
-    return games.find(game => game._uuid === uuid);
+    const games = readGamesFromFile();
+    return games.find(game => game.uuid === uuid);
 }
 
 function createGame(game) {
-    games.push(Game.createFromObject(game));
-    
+    const games = readGamesFromFile();
+    newGame.uuid = generateUUID();
+    games.push(newGame);
+    writeGamesToFile(games);
+    return newGame;
 }
 
 function updateGame(uuid, updatedGame) {
